@@ -17,24 +17,42 @@ var reel = {
     if (this.position == null) {
       this.position = randMax(this.symbols.length - 1);
     }
-    return this.symbols[this.position];
+    return [
+      this.getSymbol(this.position - 1),
+      this.getSymbol(this.position),
+      this.getSymbol(this.position + 1),
+    ];
+  },
+  getSymbol(index) {
+    return this.symbols[(this.symbols.length + index) % this.symbols.length];
   },
 };
 
 var slotMachine = {
-  reels: [
-    // TODO: implement - this machine needs 3 separate reels
-  ],
+  reels: [Object.create(reel), Object.create(reel), Object.create(reel)],
   spin() {
     this.reels.forEach(function spinReel(reel) {
       reel.spin();
     });
   },
   display() {
-    //TODO: implement!
+    const results = [[], [], []];
+    this.reels.forEach((reel) => {
+      const reelDisplay = reel.display();
+      for (let i = 0; i < 3; i++) {
+        results[i].push(reelDisplay[i]);
+      }
+    });
+    console.log("---START---");
+    let resultString = results
+      .map((res) => {
+        return res.join("|");
+      })
+      .join("\n");
+    console.log(resultString);
+    console.log("---END---");
   },
 };
-
 
 slotMachine.spin();
 slotMachine.display();
