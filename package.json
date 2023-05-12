@@ -9,7 +9,7 @@
     "start": "tsc && node dist/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "run:scopes": "node src/book-2/suzy.js"
+    "run:scopes": "node src/book-2/app-1.js"
   },
   "repository": {
     "type": "git",
